@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using QLSVOFFICIAL.WebApp.Models;
-using System;
-using System.Collections.Generic;
+using QLSVOFFICIAL.Data.Models;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace QLSVOFFICIAL.WebApp.Controllers
+namespace QLSVOFFICIAL.BackendApi1.Controllers
 {
     public class HomeController : Controller
     {
@@ -18,12 +14,8 @@ namespace QLSVOFFICIAL.WebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
+        //View lớp học phần
+        public IActionResult ClassSubject()
         {
             return View();
         }

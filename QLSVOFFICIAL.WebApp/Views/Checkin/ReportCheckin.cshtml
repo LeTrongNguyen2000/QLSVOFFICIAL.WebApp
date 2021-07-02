@@ -1,0 +1,370 @@
+﻿@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "ReportCheckin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="../wwwroot/asset/build/images/user.png" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>@Context.Session.GetString("FullName")</span>
+                            <h2>@Context.Session.GetString("MSSV")</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-home"></i> Trang chủ <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="student_information.html">Thông tin sinh viên</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-home"></i> Điểm danh <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="Check_Attendance.html">Điểm danh sinh viên</a></li>
+                                        <li><a href="Report_Attendance.html">Báo cáo điểm danh</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-desktop"></i> Danh sách lớp <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="tables.html">Danh sách lớp</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="minifyme">
+                                        <div class="navbar nav_title" style="border: 0;">
+                                            <div style="background-color:#F5F7FA" class="pull-left light"></div>
+                                            <div class="nav toggle">
+                                                <a id="menu_toggle">
+                                                    <i class="fa fa-bars">
+                                                    </i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav class="nav navbar-nav">
+                        <ul class=" navbar-right">
+                            <span class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            </span>
+                            <small>
+                                <a href="index.html">
+                                    <img src="~/asset/build/images/hutech.jpg" alt style="
+                                      width: 150px;
+                                      height: 41.60px;" class="img-fluid">
+                                </a>
+                            </small>
+                            <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="../wwwroot/asset/build/images/img.jpg" alt="">Họ và tên
+                                </a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="Change_Password.html"><i class="fa fa-sign-out pull-right"></i>Thay đổi mật khẩu</a>
+                                    <a class="dropdown-item" href="script.html"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="container-fluid">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header"><b>BÁO CÁO ĐIỂM DANH</b></div>
+                            <div class="card-body">
+                                <form id="manage-attendance">
+                                    <input type="hidden" name="id" value="">
+                                    <div class="row justify-content-center">
+                                        <label for="" class="mt-2">Chọn tên học phần</label>
+                                        <div class="col-sm-4">
+                                            <select name="class_subject_id" id="class_subject_id" class="custom-select select2 input-sm">
+                                                <option value=""></option>
+
+                                            </select>
+                                        </div>
+                                        <label for="" class="mt-2">Chọn tháng</label>
+                                        <div class="col-sm-3">
+                                            <input type="month" name="doc" id="doc" value="" class="form-control">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn  btn-primary" type="button" id="filter">Filter</button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12" id='att-list'>
+                                            <center><b><h4><i>Vui lòng chọn học phần để điểm danh</i></h4></b></center>
+                                        </div>
+                                        <div class="col-md-12" style="display: none" id="submit-btn-field">
+                                            <center>
+                                                <button class="btn btn-success btn-sm col-sm-3" type="button" id="print_att"><i class="fa fa-print"></i> IN </button>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="table_clone" style="display: none">
+                    <table width="100%">
+                        <tr>
+                            <td width="50%">
+                                <p>HỌC PHẦN: <b class="course"></b></p>
+                                <p>MÔN HỌC: <b class="subject"></b></p>
+                                <p>SỐ BUỔI LỚP THAM GIA: <b class="noc"></b></p>
+                            </td>
+                            <td width="50%">
+                                <p>LỚP: <b class="class"></b></p>
+                                <p>THỜI GIAN THAM GIA: <b class="doc"></b></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class='table table-bordered table-hover att-list'>
+                        <thead>
+                            <tr>
+                                <th class="text-center" width="5%">STT</th>
+                                <th width="20%">SINH VIÊN</th>
+                                <th>CÓ MẶT </th>
+                                <th>ĐẾN TRỄ</th>
+                                <th>VẮNG MẶT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="chk_clone" style="display: none">
+                    <div class="d-flex justify-content-center chk-opts">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input present-inp" type="checkbox" value="1" readonly="">
+                            <label class="form-check-label present-lbl">CÓ MẶT</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input absent-inp" type="checkbox" value="0" readonly="">
+                            <label class="form-check-label absent-lbl">ĐẾN TRỄ</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input late-inp" type="checkbox" value="2" readonly="">
+                            <label class="form-check-label late-lbl">VẮNG MẶT</label>
+                        </div>
+                    </div>
+                </div>
+                <noscript>
+                    <style>
+                        table.att-list {
+                            width: 100%;
+                            border-collapse: collapse
+                        }
+
+                            table.att-list td, table.att-list th {
+                                border: 1px solid
+                            }
+
+                        .text-center {
+                            text-align: center
+                        }
+                    </style>
+                </noscript>
+
+
+                <footer>
+                    <div class="pull-right">
+                        TRƯỜNG ĐẠI HỌC CÔNG NGHỆ TPHCM - HUTECH
+                    </div>
+                    <div class="clearfix"></div>
+                </footer>
+            </div>
+        </div>
+
+
+
+        <script>
+
+      $('#filter').click(function(){
+        start_load()
+        $.ajax({
+          url:'ajax.php?action=get_att_report',
+          method:'POST',
+          data:{class_subject_id:$('#class_subject_id').val(),doc:$('#doc').val()},
+          success:function(resp){
+            if(resp){
+              resp = JSON.parse(resp)
+              var _table = $('#table_clone').clone()
+              $('#att-list').html('')
+              $('#att-list').append(_table)
+              var _type = ['Absent','Present','Late'];
+              var data = !!resp.data ? resp.data : [] ;
+              var record = !!resp.record ? resp.record :[];
+              var attendance_id = !!resp.attendance_id ? resp.attendance_id : 0;
+              if(Object.keys(data).length > 0){
+                var i = 1;
+                Object.keys(data).map(function(k){
+                  var name = data[k].name;
+                  var id = data[k].id;
+                  var tr = $('<tr></tr>')
+
+                  // opts.find('.present-inp').attr({'name':'type['+id+']','id':'present_'+id})
+                  // opts.find('.absent-inp').attr({'name':'type['+id+']','id':'absent_'+id})
+                  // opts.find('.late-inp').attr({'name':'type['+id+']','id':'late_'+id})
+
+                  // opts.find('.present-lbl').attr({'for':'present_'+id})
+                  // opts.find('.absent-lbl').attr({'for':'absent_'+id})
+                  // opts.find('.late-lbl').attr({'for':'late_'+id})
+                  var present=0;
+                  var	late=0;
+                  var	absent=0;
+                  console.log(Object.keys(record).length)
+                  // record = JSON.parse(record)
+                    if(Object.keys(record).length > 0){
+                    if(record[id].length > 0){
+                      Object.keys(record[id]).map(i=>{
+                        if(record[id][i].type == 0)
+                          absent = parseInt(absent) + 1;
+                        if(record[id][i].type == 1)
+                          present = parseInt(present) + 1;
+                        if(record[id][i].type == 2)
+                          late = parseInt(late) + 1;
+                      })
+                    }
+                    }
+
+                  tr.append('<td class="text-center">'+(i++)+'</td>')
+                  tr.append('<td class="">'+(name)+'</td>')
+                  var td = '<td class="text-center">';
+                    td += present;
+                    td += '</td>';
+                    td += '<td class="text-center">';
+                    td += late;
+                    td += '</td>';
+                    td += '<td class="text-center">';
+                    td += absent;
+                    td += '</td>';
+                  tr.append(td)
+
+                  _table.find('table.att-list tbody').append(tr)
+                })
+                $('#submit-btn-field').show()
+                $('#edit_att').attr('data-id',attendance_id)
+              }else{
+                  var tr = $('<tr></tr>')
+                  tr.append('<td class="text-center" colspan="5">No data.</td>')
+                  _table.find('table.att-list tbody').append(tr)
+                $('#submit-btn-field').attr('data-id','').hide()
+                $('#edit_att').attr('data-id','')
+              }
+              $('#att-list').html('')
+              _table.find('.course').text(!!resp.details.course ? resp.details.course : '')
+              _table.find('.subject').text(!!resp.details.subject ? resp.details.subject : '')
+              _table.find('.class').text(!!resp.details.class ? resp.details.class : '')
+              _table.find('.doc').text(!!resp.details.doc ? resp.details.doc : '')
+              _table.find('.noc').text(!!resp.details.noc ? resp.details.noc : '')
+
+              _table.find('.noc').text(!!resp.details.noc ? resp.details.noc : '')
+              $('#att-list').append(_table.html())
+              if(Object.keys(record).length > 0){
+                Object.keys(record).map(k=>{
+                  // console.log('[name="type['+record[k].student_id+']"][value="'+record[k].type+'"]')
+                  $('#att-list').find('[name="type['+record[k].student_id+']"][value="'+record[k].type+'"]').prop('checked',true)
+                })
+              }
+            }
+          },
+          complete:function(){
+            $("input[readonly]").on('keyup keypress change',function(e){
+              e.preventDefault()
+              return false;
+            });
+            $('#edit_att').click(function(){
+              location.href = 'index.php?page=check_attendance&attendance_id='+$(this).attr('data-id')
+            })
+            end_load()
+          }
+        })
+      })
+      $('#manage-attendance').submit(function(e){
+        e.preventDefault()
+        start_load()
+        $.ajax({
+          url:'ajax.php?action=save_attendance',
+          method:'POST',
+          data:$(this).serialize(),
+          success:function(resp){
+            if(resp==1){
+                alert_toast("Data successfully saved.",'success')
+                            setTimeout(function(){
+                                location.reload()
+                            },1000)
+            }else if(resp ==2){
+                alert_toast("Class already has an attendance record with the slected subject and date.",'danger')
+                end_load();
+            }
+          }
+        })
+      })
+      $('#print_att').click(function(){
+        var _c = $('#att-list').html();
+        var ns = $('noscript').clone();
+        var nw = window.open('','_blank','width=900,height=600')
+        nw.document.write(_c)
+        nw.document.write(ns.html())
+        nw.document.close()
+        nw.print()
+        setTimeout(() => {
+          nw.close()
+        }, 500);
+      })
+        </script>
+</body>
+

@@ -1,48 +1,116 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - QLSVOFFICIAL.WebApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="~/asset/build/images/logo.ico" type="image/jpg" />
+
+    <title> HUTECH </title>
+
+    <!-- Bootstrap -->
+    <link href="~/asset/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/asset/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/asset/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="~/asset/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="~/asset/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="~/asset/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="~/asset/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="~/asset/build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+
+    <style>
+        bootstrap-select .dropdown-toggle:focus {
+            outline: none !important;
+        }
+
+        :focus {
+            outline: none !important;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">QLSVOFFICIAL.WebApp</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div>
+        @RenderBody()
     </div>
+    <!-- jQuery -->
+    <script src="~/asset/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/asset/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/asset/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/asset/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="~/asset/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="~/asset/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="~/asset/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="~/asset/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="~/asset/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="~/asset/Flot/jquery.flot.js"></script>
+    <script src="~/asset/Flot/jquery.flot.pie.js"></script>
+    <script src="~/asset/Flot/jquery.flot.time.js"></script>
+    <script src="~/asset/Flot/jquery.flot.stack.js"></script>
+    <script src="~/asset/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="~/asset/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="~/asset/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="~/asset/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="~/asset/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="~/asset/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="~/asset/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="~/asset/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="~/asset/moment/min/moment.min.js"></script>
+    <script src="~/asset/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - QLSVOFFICIAL.WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    -----Checkin------
+
+    <!-- iCheck -->
+    <script src="~/asset/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="~/asset/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/asset/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/asset/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/asset/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="~/asset/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="~/asset/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/asset/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/asset/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="~/asset/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="~/asset/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/asset/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="~/asset/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="~/asset/jszip/dist/jszip.min.js"></script>
+    <script src="~/asset/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/asset/pdfmake/build/vfs_fonts.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="~/asset/build/js/custom.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
