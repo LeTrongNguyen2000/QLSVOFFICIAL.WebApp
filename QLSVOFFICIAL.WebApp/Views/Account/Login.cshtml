@@ -1,0 +1,132 @@
+﻿@model QLSVOFFICIAL.WebApp.Models.User
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<body class="login">
+    <div>
+        <a class="hiddenanchor" id="signin"></a>
+        <a class="hiddenanchor" id="reset"></a>
+
+        <div class="login_wrapper">
+        </div>
+        <h1>
+            <div id="logo">
+                <center>
+                    <img src="~/asset/build/images/hutech.jpg" alt="" class="img-fluid" style="
+                    width: 300px;
+                    height: 83.200px;">
+                </center>
+            </div>
+        </h1>
+
+        <div class="login_wrapper">
+
+            <!-- login -->
+            <div class="animate form login_form">
+                <section class="login_content">
+                    <form asp-action="Validate" method="post">
+                        @if (ViewBag.ErrorMsg != null)
+                        {
+                            <p>
+                                @ViewBag.ErrorMsg
+                            </p>
+                        }
+                        <h1>ĐĂNG NHẬP</h1>
+                        <div>
+                            <input type="text" class="form-control" placeholder="MSSV" name="UserName" required="" />
+                        </div>
+                        <div> 
+                            <input type="password" class="form-control" placeholder="Password" name="Password" required="" />
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-default submit">ĐĂNG NHẬP</button>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <p class="change_link">
+                                <a href="#reset" class="resetpass"> QUÊN MẬT KHẨU </a>
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <p>©2021 ĐẠI HỌC CÔNG NGHỆ THÀNH PHỐ HỒ CHÍ MINH</p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <!-- login -->
+
+
+            <!-- Gọi hàm Validate -->
+            <script>
+                    function Validate() {
+
+                $.ajax(
+                {
+                    type: "POST",
+                    url: '@Url.Action("Validate", "Account")',
+                    data: 
+                {
+                    RoleName: $('#RoleName').val(),
+                    UserName: $('#UserName').val(),
+                    Password: $('#Password').val()
+                },
+                error: function (result) 
+                {
+                alert("There is a Problem, Try Again!");
+                },
+                success: function (result) 
+                {
+                    console.log(result);
+                    if (result.status == true) 
+                    {
+                        window.location.href = '@Url.Action("Index", "Home")';
+                    }
+                    else
+                    {
+                        alert(result.message);
+                    }
+                }
+
+                });
+                    }
+            </script>
+            <!-- Gọi hàm Validate -->
+
+
+            <div class="animate form resetpass_form" id="reset">
+                <section class="login_content">
+                    <form>
+                        <h1> QUÊN MẬT KHẨU </h1>
+                        <div>
+                            <input type="text" class="form-control" placeholder="MSSV" required="" />
+                        </div>
+                        <div>
+                            <input type="password" class="form-control" placeholder="Nhập mật khẩu gần đây" required="" />
+                        </div>
+                        <div>
+                            <input type="password" class="form-control" placeholder="Nhập mật khẩu mới" required="" />
+                        </div>
+                        <div>
+                            <a href="#signin" class="to_register"> THAY ĐỔI MẬT KHẨU </a>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <br />
+
+                        <div>
+                            <p>©2021 ĐẠI HỌC CÔNG NGHỆ THÀNH PHỐ HỒ CHÍ MINH</p>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>

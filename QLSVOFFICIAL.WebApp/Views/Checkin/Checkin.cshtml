@@ -1,0 +1,333 @@
+﻿@using Microsoft.AspNetCore.Http
+@model List<QLSVOFFICIAL.Data.Models.Checkin>  
+
+@{
+    ViewData["Title"] = "CHECKIN";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string[] TableHeaders = new string[] {"#"
+          ,"Mã số lớp học phần"
+          ,"Mã user"
+          ,"Ngày điểm danh"
+          ,"Phòng"};
+}
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html"><img src="~/asset/build/images/HTech.png" alt="" class="img-fluid"></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="~/asset/build/images/user.png" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>@Context.Session.GetString("FullName")</span>
+                            <h2>@Context.Session.GetString("MSSV")</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-home"></i> Trang chủ <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="student_information.html">Thông tin sinh viên</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-home"></i> Điểm danh <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="Check_Attendance.html">Điểm danh sinh viên</a></li>
+                                        <li><a href="Report_Attendance.html">Báo cáo điểm danh</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-desktop"></i> Danh sách lớp <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="tables.html">Danh sách lớp</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class=" navbar-right">
+                            <span class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            </span>
+                            <small>
+                                <a href="index.html">
+                                    <img src="~/asset/build/images/hutech.jpg" alt style="
+                                      width: 150px;
+                                      height: 41.60px;" class="img-fluid">
+                                </a>
+                            </small>
+                            <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown"
+                                   data-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/asset/build/images/img.jpg" alt="">Họ và tên
+                                </a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="Change_Password.html">
+                                        <i class="fa fa-sign-out pull-right"></i>Thay đổi
+                                        mật khẩu
+                                    </a>
+                                    <a class="dropdown-item" href="script.html"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="container-fluid">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <b> ĐIỂM DANH</b>
+                            </div>
+                            <div class="card-body">
+                                <div class="app-main__inner">
+                                    <div class="app-page-title">
+                                        <div class="page-title-wrapper">
+                                            <div class="page-title-heading">
+                                                <div class="page-title-icon">
+                                                    <i class="pe-7s-date icon-gradient bg-night-fade">
+                                                    </i>
+                                                </div>
+                                            </div>
+                                            <div class="page-title-actions">
+                                                <center>
+                                                    <button type="button" class="btn-shadow mr-3 btn btn-primary btn-lg" data-toggle="modal"
+                                                            data-target="#ModalEventInfo">
+                                                        <i class="fa fa-calendar-plus">
+                                                        </i> Thêm mới điểm danh
+                                                    </button>
+                                                </center>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div id="filter">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <i>Lọc điểm danh từ ngày</i>
+                                                    <input type="date" class="form-control DinhDangNgay" data-date="Chưa thiết lập"
+                                                           data-date-format="MM/DD/YYYY" id="mStart" onchange="_Filter()">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <i>đến ngày</i>
+                                                    <input type="date" class="form-control DinhDangNgay" data-date="Chưa thiết lập"
+                                                           data-date-format="MM/DD/YYYY" id="mEnd" onchange="_Filter()">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="listEvent">
+
+                                        <div class="main-card mb-3 card">
+                                            <br>
+                                            <div class="table-responsive container-fluid">
+                                                <div id="eventTable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="card-box table-responsive">
+
+                                                                <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            @*<th scope="col" aria-controls="eventTable" rowspan="1" colspan="1"
+                                                                                    style="width: 15px;">#</th>
+                                                                                <th scope="col" aria-controls="eventTable" rowspan="1" colspan="1"
+                                                                                    style="width: 100px;">Ngày</th>
+                                                                                <th scope="col" aria-controls="eventTable" rowspan="1" colspan="1"
+                                                                                    style="width: 250px;">Tên học phần</th>
+                                                                                <th scope="col" aria-controls="eventTable" rowspan="1" colspan="1"
+                                                                                    style="width: 100px;">Phòng</th>
+                                                                                <th scope="col" aria-controls="eventTable" rowspan="1" colspan="1"
+                                                                                    style="width: 60px;">Điểm danh</th>
+                                                                                <th scope="col" aria-controls="eventTable" rowspan="1" colspan="1"
+                                                                                    style="width: 50px;">Hiển thị</th>
+                                                                                <th scope="col" aria-controls="eventTable" rowspan="1" colspan="1"
+                                                                                    style="width: 50px;">SLSV</th>
+                                                                                <th scope="col" aria-controls="eventTable" rowspan="1" colspan="1"
+                                                                                    style="width: 100px;">Chức năng</th>*@
+                                                                            @{
+                                                                                foreach (var head in TableHeaders)
+                                                                                {
+                                                                                    <th>
+                                                                                        @head
+                                                                                    </th>
+                                                                                }
+                                                                            }
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @{
+                                                                            if (Model != null)
+                                                                            {
+                                                                                foreach (var Data in Model)
+                                                                                {
+                                                                                    <tr>
+                                                                                        <td> @Data.IdCheckin </td>
+                                                                                        <td> @Data.IdClassSubject </td>
+                                                                                        <td> @Data.IdUser </td>
+                                                                                        <td> @Data.CheckinDate </td>
+                                                                                        <td> @Data.CheckRoom </td>
+                                                                                    </tr>
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer>
+                        <div class="pull-right">
+                            TRƯỜNG ĐẠI HỌC CÔNG NGHỆ TPHCM - HUTECH
+                        </div>
+                        <div class="clearfix"></div>
+                    </footer>
+                </div>
+            </div>
+</body>
+
+<!--Modal-->
+<div>
+    <div class="modal fade" id="ModalEventInfo" tabindex="-1" role="dialog" aria-labelledby="ModalEventInfoTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form asp-action="AddCheckin" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalEventInfoTitle">Tạo lớp điểm danh</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @*<div class="form-group">
+            <label>Mã môn học</label>
+            <select class="selectpicker form-control" data-live-search="true" id="IdClassSubject">
+            </select>
+            <input name="IdClassSubject" class="form-control"/>
+
+
+        </div>*@
+                        <div class="form-group">
+                            <label>Tên lớp học phần</label>
+                            <input type="text" class="form-control" placeholder="" name="IdClassSubject" required="" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tên user</label>
+                            <input type="text" class="form-control" placeholder="" name="IdUser" required="" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ngày diểm danh</label>
+                            <input type="date" class="form-control DinhDangNgay" data-date="Chưa thiết lập"
+                                   data-date-format="MM/DD/YYYY" name="CheckinDate" required="" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phòng</label>
+                            <input type="text" class="form-control" placeholder="" name="CheckRoom" required="" />
+                        </div>
+
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="mAllowCheckin" checked="">
+                            <label class="custom-control-label" for="mAllowCheckin">Cho phép điểm danh</label>
+                        </div>
+                        <div class="custom-control custom-switch" onchange="UpdateDivCheckinTime()">
+                            <input type="checkbox" class="custom-control-input" id="mCheckinLimitTime">
+                            <label class="custom-control-label" for="mCheckinLimitTime">Thời gian điểm danh</label>
+                        </div>
+                        <div id="mDivCheckinTime" style="display: none">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Bắt đầu điểm danh</label>
+                                        <input type="datetime-local" class="form-control DinhDangNgay" data-date=""
+                                               data-date-format="MM/DD/YYYY HH:mm" id="mCheckinStart" value="">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Kết thúc điểm danh</label>
+                                        <input type="datetime-local" class="form-control DinhDangNgay" data-date=""
+                                               data-date-format="MM/DD/YYYY HH:mm" id="mCheckinEnd" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                        @*<button type="button" class="btn btn-primary" onclick="SaveEvent()" id="btnSaveEvent">Lưu lại</button>*@
+                        <button type="submit" value="Lưu lại" class="btn btn-primary"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
