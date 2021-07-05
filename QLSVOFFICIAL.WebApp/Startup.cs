@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity;
 using QLSVOFFICIAL.Application.Catalog.Checkin;
+using QLSVOFFICIAL.Application.System.Users;
 using QLSVOFFICIAL.Data.Models;
 using System;
 
@@ -33,6 +35,12 @@ namespace QLSVOFFICIAL.WebApp
                 services.AddHttpClient();
                 services.AddControllersWithViews();
                 services.AddSingleton<QLSVContext>();
+
+                //Declare thì mới chạy được token
+                services.AddIdentity<User, Role>()
+                    .AddEntityFrameworkStores<QLSVContext>()
+                    .AddDefaultTokenProviders();
+                    
                 // Add framework services.
                 services.AddMvc();
                 //Cơ chế điều khiển vòng đời, mỗi lần request object sẽ tạo mới
@@ -45,6 +53,13 @@ namespace QLSVOFFICIAL.WebApp
                 //Với mỗi IPuclicStudentCheckinService sẽ khởi tạo tk PuclicStudentCheckinService
                 services.AddTransient<IPublicStudentCheckinService, PublicStudentCheckinService>();
                 services.AddTransient<IManageStudentCheckinService, ManageStudentCheckinService>();
+                services.AddTransient<IUserService, UserService>();
+
+                services.AddTransient<UserManager<User>, UserManager<User>>();
+                services.AddTransient<SignInManager<User>, SignInManager<User>>();
+                services.AddTransient<RoleManager<Role>, RoleManager<Role>>();
+                
+
                 services.AddControllersWithViews();
 
                 services.AddSwaggerGen(c =>
@@ -83,25 +98,16 @@ namespace QLSVOFFICIAL.WebApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+
             app.UseRouting();
 
-            app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger QLSVOFFICIAL.WebApp V1");
-                //c.RoutePrefix = string.Empty;  // Set Swagger UI at apps root
-            });
-
-            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Account}/{action=Login}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+//using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
@@ -10,7 +11,7 @@ namespace QLSVOFFICIAL.Data.Models
 {
     [Table("USER")]
     [Index(nameof(UserName), Name = "unique_UserName", IsUnique = true)]
-    public partial class User
+    public partial class User : IdentityUser<Guid> //Khóa chính duy nhất cho toàn hệ thống
     {
         public User()
         {

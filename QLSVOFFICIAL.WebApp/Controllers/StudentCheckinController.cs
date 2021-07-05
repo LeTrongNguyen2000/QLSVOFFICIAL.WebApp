@@ -36,9 +36,9 @@ namespace QLSVOFFICIAL.BackendApi1.Controllers
         }
         //http://localhost:port/product/id
         [HttpGet("{StudentCheckinId}/{CheckinId}")]
-        public async Task<IActionResult> GetById(int StudentCheckinId, string CheckinId)
+        public async Task<IActionResult> GetById(int StudentCheckinId, int CheckinId)
         {
-            var studentcheckins = await _manageStudentCheckinService.GetById(StudentCheckinId, int.Parse(CheckinId));
+            var studentcheckins = await _manageStudentCheckinService.GetById(StudentCheckinId, CheckinId);
             if (studentcheckins == null)
                 return BadRequest("Không tìm thấy sinh viên");
             return Ok(studentcheckins);
