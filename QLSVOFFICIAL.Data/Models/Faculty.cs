@@ -16,7 +16,7 @@ namespace QLSVOFFICIAL.Data.Models
         {
             Classes = new HashSet<Class>();
             Subjects = new HashSet<Subject>();
-            Users = new HashSet<User>();
+            Users = new HashSet<AppUser>();
         }
 
         [Key]
@@ -32,7 +32,7 @@ namespace QLSVOFFICIAL.Data.Models
         public virtual ICollection<Class> Classes { get; set; }
         [InverseProperty(nameof(Subject.IdFacultyNavigation))]
         public virtual ICollection<Subject> Subjects { get; set; }
-        [InverseProperty(nameof(User.IdFacultyNavigation))]
-        public virtual ICollection<User> Users { get; set; }
+        [InverseProperty(nameof(AppUser.IdFacultyNavigation))]
+        public virtual ICollection<AppUser> Users { get; set; }
     }
 }

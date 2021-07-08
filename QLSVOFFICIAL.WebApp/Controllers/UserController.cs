@@ -7,6 +7,7 @@ using QLSVOFFICIAL.Application.System.Users;
 using QLSVOFFICIAL.ViewModels.System.Users;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using QLSVOFFICIAL.Data.EF;
 
 namespace QLSVOFFICIAL.BackendApi1.Controllers
 {
@@ -47,7 +48,7 @@ namespace QLSVOFFICIAL.BackendApi1.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Validate(User us)
+        public IActionResult Validate(AppUser us)
         {
             var _admin = db.Users.Where(s => s.UserName == us.UserName);
             //var _role = db.Roles.Where(s => s.IdRole == us.IdRole);

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using QLSVOFFICIAL.Data.Models;
 using QLSVOFFICIAL.WebApp.Views.Shared;
+using QLSVOFFICIAL.Data.EF;
 
 namespace QLSVOFFICIAL.BackendApi1.Controllers
 {

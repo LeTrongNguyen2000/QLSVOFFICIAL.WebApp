@@ -3,6 +3,7 @@ using System.Linq;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
 using QLSVOFFICIAL.Data.Models;
+using QLSVOFFICIAL.Data.EF;
 
 namespace QLSVOFFICIAL.BackendApi1.Controllers
 {
@@ -22,7 +23,7 @@ namespace QLSVOFFICIAL.BackendApi1.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Validate(User us)
+        public IActionResult Validate(AppUser us)
         {
             var _admin = db.Users.Where(s => s.UserName == us.UserName);
             //var _role = db.Roles.Where(s => s.IdRole == us.IdRole);
@@ -45,11 +46,6 @@ namespace QLSVOFFICIAL.BackendApi1.Controllers
                 ViewBag.ErrorMsg = "MSSV or Password is wrong";
                 return View("Login");
             }
-        }
-        //View đổi mật khẩu
-        public IActionResult ChangePass()
-        {
-            return View();
         }
         //View thông tin sinh viên
         public IActionResult Inf()

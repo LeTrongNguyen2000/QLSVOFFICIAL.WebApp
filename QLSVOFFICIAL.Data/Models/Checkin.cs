@@ -30,8 +30,8 @@ namespace QLSVOFFICIAL.Data.Models
         [InverseProperty(nameof(ClassSubject.Checkins))]
         public virtual ClassSubject IdClassSubjectNavigation { get; set; }
         [ForeignKey(nameof(IdUser))]
-        [InverseProperty(nameof(User.Checkins))]
-        public virtual User IdUserNavigation { get; set; }
+        [InverseProperty(nameof(AppUser.Checkins))]
+        public virtual AppUser IdUserNavigation { get; set; }
         [InverseProperty(nameof(StudentCheckin.IdChekinNavigation))]
         public virtual ICollection<StudentCheckin> StudentCheckins { get; set; }
     }

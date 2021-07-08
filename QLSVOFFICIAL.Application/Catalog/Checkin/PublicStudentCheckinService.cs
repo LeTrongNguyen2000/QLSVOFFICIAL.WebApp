@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using QLSVOFFICIAL.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using QLSVOFFICIAL.ViewModels.Catalog.Checkin;
 using QLSVOFFICIAL.ViewModels.Common;
+using QLSVOFFICIAL.Data.EF;
 
 namespace QLSVOFFICIAL.Application.Catalog.Checkin
 {

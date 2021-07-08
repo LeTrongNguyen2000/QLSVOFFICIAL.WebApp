@@ -30,8 +30,8 @@ namespace QLSVOFFICIAL.Data.Models
         [InverseProperty(nameof(Class.Students))]
         public virtual Class IdClassNavigation { get; set; }
         [ForeignKey(nameof(IdUser))]
-        [InverseProperty(nameof(User.Students))]
-        public virtual User IdUserNavigation { get; set; }
+        [InverseProperty(nameof(AppUser.Students))]
+        public virtual AppUser IdUserNavigation { get; set; }
         [InverseProperty(nameof(AbsenceForm.IdStudentNavigation))]
         public virtual ICollection<AbsenceForm> AbsenceForms { get; set; }
         [InverseProperty(nameof(StudentCheckin.IdStudentNavigation))]

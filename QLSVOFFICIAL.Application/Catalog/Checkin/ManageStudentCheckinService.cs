@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using QLSVOFFICIAL.Data.EF;
 using QLSVOFFICIAL.Data.Models;
 using QLSVOFFICIAL.Utilities.Exceptions;
 using QLSVOFFICIAL.ViewModels.Catalog.Checkin;
@@ -81,14 +82,13 @@ namespace QLSVOFFICIAL.Application.Catalog.Checkin
             return pagedResult;
         }
 
-        public async Task<StudentCheckinViewModel> GetById(int StudentCheckinId, int CheckinId)
+        public async Task<StudentCheckinViewModel> GetById(int CheckinId, int StudentCheckinId)
         {
-            var studentCheckin = await _context.StudentCheckins.FindAsync(StudentCheckinId);
-            var checkin = await _context.Checkins.FirstOrDefaultAsync(x => x.IdCheckin == StudentCheckinId);
+            var studentCheckin = await _context.StudentCheckins.FindAsync(CheckinId, StudentCheckinId);
 
             var studentCheckinViewModel = new StudentCheckinViewModel()
             {
-                IdCheckin = checkin.IdCheckin, // checkin !=null ? checkin.IdCheckin : null
+                IdCheckin = studentCheckin.IdCheckin, // checkin !=null ? checkin.IdCheckin : null
                 IdStudent = studentCheckin.IdStudent,
                 CheckIn = studentCheckin.CheckIn,
                 CheckOut = studentCheckin.CheckOut,

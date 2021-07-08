@@ -15,7 +15,7 @@ namespace QLSVOFFICIAL.Application.Catalog.Checkin
 
         Task<int> Delete(int StudentCheckinId);
 
-        Task<StudentCheckinViewModel> GetById(int StudentCheckinId, int CheckinId);
+        Task<StudentCheckinViewModel> GetById(int CheckinId, int StudentCheckinId);
 
         Task<PagedResult<StudentCheckinViewModel>> GetAllPaging(GetManageStudentCheckinPagingRequest request);
     }
