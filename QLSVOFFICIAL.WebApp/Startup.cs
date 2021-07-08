@@ -6,8 +6,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using QLSVOFFICIAL.Application.Catalog.Checkin;
 using QLSVOFFICIAL.Application.System.Users;
-using QLSVOFFICIAL.Data.Models;
 using System;
+using QLSVOFFICIAL.Data.EF;
+using QLSVOFFICIAL.Data.Models;
 
 namespace QLSVOFFICIAL.WebApp
 {
@@ -37,7 +38,7 @@ namespace QLSVOFFICIAL.WebApp
                 services.AddSingleton<QLSVContext>();
 
                 //Declare thì mới chạy được token
-                services.AddIdentity<User, Role>()
+                services.AddIdentity<AppUser, AppRole>()
                     .AddEntityFrameworkStores<QLSVContext>()
                     .AddDefaultTokenProviders();
                     
@@ -55,9 +56,9 @@ namespace QLSVOFFICIAL.WebApp
                 services.AddTransient<IManageStudentCheckinService, ManageStudentCheckinService>();
                 services.AddTransient<IUserService, UserService>();
 
-                services.AddTransient<UserManager<User>, UserManager<User>>();
-                services.AddTransient<SignInManager<User>, SignInManager<User>>();
-                services.AddTransient<RoleManager<Role>, RoleManager<Role>>();
+                services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+                services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+                services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
                 
 
                 services.AddControllersWithViews();
@@ -102,6 +103,13 @@ namespace QLSVOFFICIAL.WebApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger/json", "Swagger QLSVOFFICAIL.WebApp V1");
+            });
 
             app.UseEndpoints(endpoints =>
             {

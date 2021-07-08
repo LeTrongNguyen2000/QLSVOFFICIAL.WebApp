@@ -1,26 +1,25 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using QLSVOFFICIAL.ViewModels.System.Users;
-using QLSVOFFICIAL.Data.Models;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using User = QLSVOFFICIAL.Data.Models.User;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using System;
+using QLSVOFFICIAL.Data.Models;
 
 namespace QLSVOFFICIAL.Application.System.Users
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly RoleManager<Role> _roleManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly RoleManager<AppRole> _roleManager;
         private readonly IConfiguration _config;
         //Declare thư viện Identity
-        public UserService(UserManager<User> userManager, SignInManager<User> signInManager,
-            RoleManager<Role> roleManager, IConfiguration config)
+        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
+            RoleManager<AppRole> roleManager, IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;

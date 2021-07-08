@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace QLSVOFFICIAL.BackendApi1.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     //Khi Một controller được khởi tạo thì nó sẽ gọi constructor
     public class StudentCheckinController : Controller
     {
         private readonly IPublicStudentCheckinService _pucblicStudentCheckinService;
         private readonly IManageStudentCheckinService _manageStudentCheckinService;
-
         public StudentCheckinController(IPublicStudentCheckinService publicStudentCheckinService,
                                         IManageStudentCheckinService manageStudentCheckinService)
         {
@@ -35,16 +36,16 @@ namespace QLSVOFFICIAL.BackendApi1.Controllers
             return Ok(studentcheckins);
         }
         //http://localhost:port/product/id
-        [HttpGet("{StudentCheckinId}/{CheckinId}")]
-        public async Task<IActionResult> GetById(int StudentCheckinId, int CheckinId)
+        [HttpGet("CheckinId}/{StudentCheckinId}")]
+        public async Task<IActionResult> GetById(int CheckinId, int StudentCheckinId)
         {
-            var studentcheckins = await _manageStudentCheckinService.GetById(StudentCheckinId, CheckinId);
+            var studentcheckins = await _manageStudentCheckinService.GetById(CheckinId, StudentCheckinId);
             if (studentcheckins == null)
                 return BadRequest("Không tìm thấy sinh viên");
             return Ok(studentcheckins);
         }
 
-        [HttpPost("")]
+        [HttpPost]
         public async Task<IActionResult> Create([FromForm]StudentCheckinCreateRequest request)
         {
             var IdStudent = await _manageStudentCheckinService.Create(request);
@@ -56,7 +57,7 @@ namespace QLSVOFFICIAL.BackendApi1.Controllers
             return CreatedAtAction(nameof(GetById), new { id = IdStudent }, studentCheckin);
             //Trả về một action GetById
         }
-        [HttpPut("")]
+        [HttpPut]
         public async Task<IActionResult> Update([FromForm] StudentCheckinUpdateRequest request)
         {
             var affectedResult = await _manageStudentCheckinService.Update(request);

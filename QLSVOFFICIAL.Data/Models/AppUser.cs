@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
-//using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
 namespace QLSVOFFICIAL.Data.Models
 {
-    [Table("USER")]
+    [Table("AppUser")]
     [Index(nameof(UserName), Name = "unique_UserName", IsUnique = true)]
-    public partial class User : IdentityUser<Guid> //Khóa chính duy nhất cho toàn hệ thống
+    public partial class AppUser : IdentityUser<Guid> //Khóa chính duy nhất cho toàn hệ thống
     {
-        public User()
+        public AppUser()
         {
             Checkins = new HashSet<Checkin>();
             StudentCheckins = new HashSet<StudentCheckin>();
@@ -42,8 +42,8 @@ namespace QLSVOFFICIAL.Data.Models
         [InverseProperty(nameof(Faculty.Users))]
         public virtual Faculty IdFacultyNavigation { get; set; }
         [ForeignKey(nameof(IdRole))]
-        [InverseProperty(nameof(Role.Users))]
-        public virtual Role IdRoleNavigation { get; set; }
+        [InverseProperty(nameof(AppRole.Users))]
+        public virtual AppRole IdRoleNavigation { get; set; }
         [InverseProperty(nameof(Checkin.IdUserNavigation))]
         public virtual ICollection<Checkin> Checkins { get; set; }
         [InverseProperty(nameof(StudentCheckin.IdUserNavigation))]
